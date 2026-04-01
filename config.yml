@@ -1,0 +1,42 @@
+# --- arXiv data collection ---
+dataset:
+  max_papers_per_category: 100
+  categories:
+    - code: "cs.LG"
+      name: "Machine Learning"
+      color: "#C8102E"
+    - code: "cs.CV"
+      name: "Computer Vision"
+      color: '#003DA5'
+    - code: "cs.CL"
+      name: "Comp. Linguistics"
+      color: '#00843D'
+    - code: "cs.DB"
+      name: "Databases"
+      color: '#FF8200'
+    - code: "cs.SE"
+      name: "Software Eng."
+      color: '#6A1B9A'
+
+# --- Data cleaning ---
+cleaning:
+  min_abstract_length: 100
+
+# --- Experiments ---
+experiments:
+  minilm:
+    model: "all-MiniLM-L6-v2"
+    batch_size: 64
+  mpnet:
+    model: "all-mpnet-base-v2"
+    batch_size: 32
+
+# --- Dimensionality reduction for visualization ---
+visualization:
+  method: "pca"            # pca | tsne | umap
+  n_components: 2
+
+# --- Output paths (relative to project root) ---
+output:
+  data_dir: "data"
+  figures_dir: "figures"

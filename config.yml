@@ -40,3 +40,4 @@ visualization:
 output:
   data_dir: "data"
   figures_dir: "figures"
+  save_dir: "results"

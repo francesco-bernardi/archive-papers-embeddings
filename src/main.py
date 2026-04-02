@@ -1,5 +1,8 @@
 import logging
 
+import numpy as np
+
+from pathlib import Path
 from dataset.downloader import collect_arxiv_papers
 from dataset.cleaner import clean_papers
 from model.inference import embedd_papers
@@ -20,7 +23,8 @@ logger = logging.getLogger(__name__)
 MAX_PAPERS = config["dataset"]["max_papers_per_category"]
 CATEGORIES = config["dataset"]["categories"]
 EXPERIMENTS = config["experiments"]
-
+SAVE_DIR = Path(config["output"]["save_dir"])
+SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 def collect_all_papers() -> list[dict]:
     all_papers = []
@@ -57,6 +61,24 @@ def main() -> None:
             df_result['embedding'].tolist(), 
             config=config
         )
-    
+
+        df_metadata = df_result[
+            [
+                'title', 
+                'abstract', 
+                'authors', 
+                'published', 
+                'category', 
+                'arxiv_id', 
+                'abstract_length'
+            ]
+        ]
+
+        df_metadata.to_csv(SAVE_DIR / f'{exp_name}_metadata.csv', index=False)
+        np.save(
+            SAVE_DIR / f'{exp_name}_embeddings.npy', 
+            df_result['embedding'].tolist()
+        )
+
 if __name__ == "__main__":
     main()

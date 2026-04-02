@@ -1,6 +1,6 @@
 # --- arXiv data collection ---
 dataset:
-  max_papers_per_category: 100
+  max_papers_per_category: 300
   categories:
     - code: "cs.LG"
       name: "Machine Learning"
@@ -16,6 +16,15 @@ dataset:
       color: '#FF8200'
     - code: "cs.SE"
       name: "Software Eng."
+      color: '#6A1B9A'
+    - code: "stat.ML"
+      name: "Statistics Machine Learning"
+      color: '#00843D'
+    - code: "cs.AI"
+      name: "Artificial Intelligence"
+      color: '#FF8200'
+    - code: "math.OC"
+      name: "Optimization and Control"
       color: '#6A1B9A'
 
 # --- Data cleaning ---

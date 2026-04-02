@@ -2,7 +2,10 @@ import arxiv
 
 # Create the arXiv client once and reuse it
 # This is recommended by the arxiv package to respect rate limits
-client = arxiv.Client()
+client = arxiv.Client(
+    delay_seconds=5.0,   # wait 5s between requests (default is 3s)
+    num_retries=3
+)
 
 def collect_arxiv_papers(category, max_results=100):
     """

@@ -1,10 +1,12 @@
 import logging
+import json
 
 import numpy as np
 
 from pathlib import Path
 from dataset.downloader import collect_arxiv_papers
 from dataset.cleaner import clean_papers
+from dataset.vect_db import create_vector_db_data
 from model.inference import embedd_papers
 from utils.viz import viz_embedding
 from utils.utils import load_config
@@ -79,6 +81,10 @@ def main() -> None:
             SAVE_DIR / f'{exp_name}_embeddings.npy', 
             df_result['embedding'].tolist()
         )
+
+        vector_db_data = create_vector_db_data(df_result)
+        with open(SAVE_DIR / f'{exp_name}_vector_db_data.json', 'w') as f:
+            json.dump(vector_db_data, f, indent=2)
 
 if __name__ == "__main__":
     main()
